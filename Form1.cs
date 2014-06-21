@@ -14,14 +14,39 @@ namespace Hearts_of_Oak_Packager
     public partial class Form1 : Form
     {
         int cLevel;
+        public List<string> IncludeFolders = new List<string>();
+        public List<string> IgnoreExtensions = new List<string>();
+        public List<string> IgnoreFolders = new List<string>();
+        public List<string> IgnoreFiles = new List<string>();
+        public List<string> IgnoreCompress = new List<string>();
         
         public Form1()
         {
             InitializeComponent();
 
             cbxCompressionLevel.SelectedItem = "9";
+
+            FillListFromFile("IncludeFolders.txt", IncludeFolders);
+            FillListFromFile("IgnoreExtensions.txt", IgnoreExtensions);
+            FillListFromFile("IgnoreFolders.txt", IgnoreFolders);
+            FillListFromFile("IgnoreFiles.txt", IgnoreFiles);
+            FillListFromFile("IgnoreCompress.txt", IgnoreCompress);
+
         }
 
+        void FillListFromFile(string txtFile, List<string> _list)
+        {
+            if (File.Exists(txtFile))
+            {
+                AddRange(File.ReadAllLines(txtFile), _list);
+            }
+        }
+
+        public void AddRange(IEnumerable<string> collection, List<string> _list)
+        {
+            foreach (var i in collection) _list.Add(i);
+        }
+        
         private void btnCERootBrowse_Click(object sender, EventArgs e)
         {
             fbdCERoot.ShowNewFolderButton = false;
@@ -69,7 +94,7 @@ namespace Hearts_of_Oak_Packager
             foreach (string f in Directory.GetFiles(txbCERoot.Text))
             {
                 FileInfo fName = new FileInfo(@f);
-                if (!FileHelper.IgnoreExtensions.Any(fName.Extension.Contains) && !FileHelper.IgnoreFiles.Any(fName.Name.Contains))
+                if (!IgnoreExtensions.Any(fName.Extension.Contains) && !IgnoreFiles.Any(fName.Name.Contains))
                 File.Copy(f, txbOutput.Text + "\\" + fName.Name, true);
             }
 
@@ -78,20 +103,29 @@ namespace Hearts_of_Oak_Packager
             {
                 string sPath = new DirectoryInfo(@d).Name;
                 string oPath = txbOutput.Text + "\\" + sPath;
-                if (FileHelper.IncludeFolders.Any(sPath.Contains))
+                if (IncludeFolders.Any(sPath.Contains))
                 {
                     //recursively move files from this path to the output folder
                     DirectoryCopy(d, oPath, true);
+                    bwpReport(sPath + " copied", true);
                 }
             };
 
-            string ogPath = txbOutput.Text + "\\Game"; 
+            string iPath = new DirectoryInfo(txbGamePath.Text).Name;
+            string ogPath = txbOutput.Text + "\\" + iPath; 
             if (!Directory.Exists(ogPath)) {Directory.CreateDirectory(ogPath);};
             foreach (string d in Directory.GetDirectories(txbGamePath.Text))
             {
                 string dPath = new DirectoryInfo(@d).Name;
                                
                 if (bwpMove.CancellationPending) { return; };
+
+                foreach (string f in Directory.GetFiles(txbGamePath.Text))
+                {
+                    FileInfo fName = new FileInfo(@f);
+                    if (!IgnoreExtensions.Any(fName.Extension.Contains) && !IgnoreFiles.Any(fName.Name.Contains))
+                        File.Copy(f, ogPath + "\\" + fName.Name, true);
+                }
 
                 if (cbxCompressGame.Checked)
                 {
@@ -100,7 +134,7 @@ namespace Hearts_of_Oak_Packager
 
                     //bwpReport(dPath + " copied", true);
 
-                    if (!FileHelper.IgnoreCompress.Any(dPath.Contains))
+                    if (!IgnoreCompress.Any(dPath.Contains))
                     {
                         if (!Directory.Exists(ogPath + "\\" + dPath)) { Directory.CreateDirectory(ogPath + "\\" + dPath); };
                         DirectoryCopy(d, ogPath + "\\" + dPath + "\\" + dPath, true);
@@ -110,12 +144,12 @@ namespace Hearts_of_Oak_Packager
                         //Directory.Move(ogPath + "\\" + dPath, ogPath + "\\" + dPath + "\\" + dPath);
 
                         string excludes = "";
-                        foreach (string sI in FileHelper.IgnoreExtensions)
+                        foreach (string sI in IgnoreExtensions)
                         {
                             excludes += " -x!*" + sI;
                         }
 
-                        foreach (string sI in FileHelper.IgnoreFiles)
+                        foreach (string sI in IgnoreFiles)
                         {
                             excludes += " -x!" + sI;
                         }
@@ -224,7 +258,7 @@ namespace Hearts_of_Oak_Packager
             FileInfo[] files = dir.GetFiles();
             foreach (FileInfo file in files)
             {
-                if (!FileHelper.IgnoreExtensions.Any(file.Extension.Contains) && !FileHelper.IgnoreFiles.Any(file.Name.Contains))
+                if (!IgnoreExtensions.Any(file.Extension.Contains) && !IgnoreFiles.Any(file.Name.Contains))
                 {
                     string temppath = Path.Combine(destDirName, file.Name);
                     file.CopyTo(temppath, true);
@@ -238,7 +272,7 @@ namespace Hearts_of_Oak_Packager
             {
                 foreach (DirectoryInfo subdir in dirs)
                 {
-                    if (!FileHelper.IgnoreFolders.Any(subdir.Name.ToLower().Equals)) {
+                    if (!IgnoreFolders.Any(subdir.Name.ToLower().Equals)) {
                         string temppath = Path.Combine(destDirName, subdir.Name);
                         DirectoryCopy(subdir.FullName, temppath, copySubDirs);
                     }
@@ -291,6 +325,43 @@ namespace Hearts_of_Oak_Packager
         private void cbxCompressionLevel_SelectedIndexChanged(object sender, EventArgs e)
         {
             cLevel = Convert.ToInt16(cbxCompressionLevel.SelectedItem.ToString());
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void includeFoldersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSetting("IncludeFolders");
+        }
+
+        private void OpenSetting(string SettingName)
+        {
+            EditSetting f = new EditSetting();
+            f.setting = SettingName;
+            f.ShowDialog();
+        }
+
+        private void ignoreExtensionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSetting("IgnoreExtensions");
+        }
+
+        private void ignoreFoldersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSetting("IgnoreFolders");
+        }
+
+        private void ignoreFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSetting("IgnoreFiles");
+        }
+
+        private void ignoreGameFoldersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSetting("IgnoreCompress");
         }
 
     }

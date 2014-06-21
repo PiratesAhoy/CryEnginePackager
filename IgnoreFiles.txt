@@ -1,0 +1,6 @@
+Editor.exe
+error.bmp
+error.dmp
+luac.out
+tags.txt
+include.me

@@ -1,0 +1,11 @@
+.bak
+.bak2
+.cry
+.max
+.psd
+.log
+.lib
+.pdb
+.exp
+.zip
+.ilk

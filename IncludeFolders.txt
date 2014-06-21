@@ -1,0 +1,6 @@
+Bin32
+Bin64
+Bin32_Dedicated
+Bin64_Dedicated
+Engine
+Localization

@@ -1,0 +1,9 @@
+tools
+editor
+code
+logBackups
+statoscope
+bintemp
+user
+rc
+flashassets

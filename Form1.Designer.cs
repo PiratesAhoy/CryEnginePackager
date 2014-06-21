@@ -55,6 +55,13 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.cbxCompressionLevel = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.includeFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ignoreExtensionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ignoreFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ignoreFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ignoreGameFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,7 +99,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbSettings});
+            this.tsbSettings,
+            this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(456, 24);
@@ -107,30 +115,30 @@
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.tsbSettings.Name = "tsbSettings";
-            this.tsbSettings.Size = new System.Drawing.Size(61, 20);
-            this.tsbSettings.Text = "Settings";
+            this.tsbSettings.Size = new System.Drawing.Size(37, 20);
+            this.tsbSettings.Text = "File";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -176,7 +184,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 246);
+            this.label3.Location = new System.Drawing.Point(12, 171);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 13);
             this.label3.TabIndex = 10;
@@ -184,7 +192,7 @@
             // 
             // btnOutput
             // 
-            this.btnOutput.Location = new System.Drawing.Point(359, 260);
+            this.btnOutput.Location = new System.Drawing.Point(359, 185);
             this.btnOutput.Name = "btnOutput";
             this.btnOutput.Size = new System.Drawing.Size(75, 23);
             this.btnOutput.TabIndex = 9;
@@ -194,7 +202,7 @@
             // 
             // txbOutput
             // 
-            this.txbOutput.Location = new System.Drawing.Point(15, 262);
+            this.txbOutput.Location = new System.Drawing.Point(15, 187);
             this.txbOutput.Name = "txbOutput";
             this.txbOutput.Size = new System.Drawing.Size(338, 20);
             this.txbOutput.TabIndex = 8;
@@ -209,7 +217,7 @@
             // 
             // btnBuild
             // 
-            this.btnBuild.Location = new System.Drawing.Point(15, 336);
+            this.btnBuild.Location = new System.Drawing.Point(15, 213);
             this.btnBuild.Name = "btnBuild";
             this.btnBuild.Size = new System.Drawing.Size(75, 23);
             this.btnBuild.TabIndex = 11;
@@ -220,7 +228,7 @@
             // lblFileStatus
             // 
             this.lblFileStatus.AutoSize = true;
-            this.lblFileStatus.Location = new System.Drawing.Point(12, 394);
+            this.lblFileStatus.Location = new System.Drawing.Point(15, 240);
             this.lblFileStatus.Name = "lblFileStatus";
             this.lblFileStatus.Size = new System.Drawing.Size(60, 13);
             this.lblFileStatus.TabIndex = 12;
@@ -228,7 +236,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 410);
+            this.progressBar1.Location = new System.Drawing.Point(15, 256);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(432, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
@@ -242,7 +250,7 @@
             // btnCancel
             // 
             this.btnCancel.Enabled = false;
-            this.btnCancel.Location = new System.Drawing.Point(96, 336);
+            this.btnCancel.Location = new System.Drawing.Point(96, 213);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 14;
@@ -256,9 +264,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 439);
+            this.listBox1.Location = new System.Drawing.Point(12, 311);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(432, 251);
+            this.listBox1.Size = new System.Drawing.Size(432, 225);
             this.listBox1.TabIndex = 15;
             // 
             // cbxCompressionLevel
@@ -286,11 +294,68 @@
             this.label4.TabIndex = 17;
             this.label4.Text = "Compression";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 295);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(25, 13);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Log";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.includeFoldersToolStripMenuItem,
+            this.ignoreExtensionsToolStripMenuItem,
+            this.ignoreFoldersToolStripMenuItem,
+            this.ignoreFilesToolStripMenuItem,
+            this.ignoreGameFoldersToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // includeFoldersToolStripMenuItem
+            // 
+            this.includeFoldersToolStripMenuItem.Name = "includeFoldersToolStripMenuItem";
+            this.includeFoldersToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.includeFoldersToolStripMenuItem.Text = "Include Folders";
+            this.includeFoldersToolStripMenuItem.Click += new System.EventHandler(this.includeFoldersToolStripMenuItem_Click);
+            // 
+            // ignoreExtensionsToolStripMenuItem
+            // 
+            this.ignoreExtensionsToolStripMenuItem.Name = "ignoreExtensionsToolStripMenuItem";
+            this.ignoreExtensionsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.ignoreExtensionsToolStripMenuItem.Text = "Ignore Extensions";
+            this.ignoreExtensionsToolStripMenuItem.Click += new System.EventHandler(this.ignoreExtensionsToolStripMenuItem_Click);
+            // 
+            // ignoreFoldersToolStripMenuItem
+            // 
+            this.ignoreFoldersToolStripMenuItem.Name = "ignoreFoldersToolStripMenuItem";
+            this.ignoreFoldersToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.ignoreFoldersToolStripMenuItem.Text = "Ignore Folders";
+            this.ignoreFoldersToolStripMenuItem.Click += new System.EventHandler(this.ignoreFoldersToolStripMenuItem_Click);
+            // 
+            // ignoreFilesToolStripMenuItem
+            // 
+            this.ignoreFilesToolStripMenuItem.Name = "ignoreFilesToolStripMenuItem";
+            this.ignoreFilesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.ignoreFilesToolStripMenuItem.Text = "Ignore Files";
+            this.ignoreFilesToolStripMenuItem.Click += new System.EventHandler(this.ignoreFilesToolStripMenuItem_Click);
+            // 
+            // ignoreGameFoldersToolStripMenuItem
+            // 
+            this.ignoreGameFoldersToolStripMenuItem.Name = "ignoreGameFoldersToolStripMenuItem";
+            this.ignoreGameFoldersToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.ignoreGameFoldersToolStripMenuItem.Text = "Ignore Game Folders";
+            this.ignoreGameFoldersToolStripMenuItem.Click += new System.EventHandler(this.ignoreGameFoldersToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 697);
+            this.ClientSize = new System.Drawing.Size(456, 545);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cbxCompressionLevel);
             this.Controls.Add(this.listBox1);
@@ -312,6 +377,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Hearts Of Oak Packager";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -347,6 +413,13 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ComboBox cbxCompressionLevel;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem includeFoldersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ignoreExtensionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ignoreFoldersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ignoreFilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ignoreGameFoldersToolStripMenuItem;
     }
 }
 
