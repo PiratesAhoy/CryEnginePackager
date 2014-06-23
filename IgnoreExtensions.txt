@@ -9,3 +9,4 @@
 .exp
 .zip
 .ilk
+.lnk

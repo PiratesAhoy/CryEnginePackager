@@ -20,6 +20,7 @@ namespace Hearts_of_Oak_Packager
         public List<string> IgnoreFiles = new List<string>();
         public List<string> IgnoreCompress = new List<string>();
         public List<_setting> extRedirectPath = new List<_setting>();
+        public List<_setting> FolderRedirect = new List<_setting>();
         
         public static string _settingFile = "settings.txt";
         public List<_setting> settings = new List<_setting>();
@@ -36,8 +37,8 @@ namespace Hearts_of_Oak_Packager
             FillListFromFile("IgnoreFiles.txt", IgnoreFiles);
             FillListFromFile("IgnoreCompress.txt", IgnoreCompress);
 
-            extRedirectPath.Add(new _setting() { _name = "Animation", _value = ".anm" });
-            extRedirectPath.Add(new _setting() { _name = "GeomCaches", _value = ".cax" });
+            GetSettings("SpecialExtensions.txt", extRedirectPath);
+            GetSettings("FolderRedirect.txt", FolderRedirect);
         }
 
         void FillListFromFile(string txtFile, List<string> _list)
@@ -159,6 +160,8 @@ namespace Hearts_of_Oak_Packager
                 }
             };
 
+
+            //move all files in the game path
             string iPath = new DirectoryInfo(txbGamePath.Text).Name;
             string ogPath = txbOutput.Text + "\\" + iPath; 
             if (!Directory.Exists(ogPath)) {Directory.CreateDirectory(ogPath);};
@@ -177,48 +180,62 @@ namespace Hearts_of_Oak_Packager
 
                 if (cbxCompressGame.Checked)
                 {
-                    //if (!Directory.Exists(ogPath + "\\" + dPath)) { Directory.CreateDirectory(ogPath + "\\" + dPath); };
-                    //DirectoryCopy(d, ogPath + "\\" + dPath + "\\" + dPath, true);
-
-                    //bwpReport(dPath + " copied", true);
-
                     if (!IgnoreCompress.Any(dPath.Contains))
                     {
                         // find what folder this path would normally end up in
+                        //if (!Directory.Exists(ogPath + "\\" + dPath)) { Directory.CreateDirectory(ogPath + "\\" + dPath); };
+                        string dPath2 = dPath;
+                        foreach (_setting s in FolderRedirect)
+                        {
+                            if (s._value == dPath)
+                            {
+                                dPath2 = s._name;
+                            }
+                        }
 
-                        if (!Directory.Exists(ogPath + "\\" + dPath)) { Directory.CreateDirectory(ogPath + "\\" + dPath); };
-                        DirectoryCopy(d, ogPath + "\\" + dPath + "\\" + dPath, true);
+                        if (!Directory.Exists(ogPath + "\\" + dPath2)) { Directory.CreateDirectory(ogPath + "\\" + dPath2); };
+                        DirectoryCopy(d, ogPath + "\\" + dPath2 + "\\" + dPath, true);
 
                         bwpReport("Compressing game pak " + dPath);
                         //if (!Directory.Exists(ogPath + "\\" + dPath + "\\" + dPath)) { Directory.CreateDirectory(ogPath + "\\" + dPath + "\\" + dPath); };
                         //Directory.Move(ogPath + "\\" + dPath, ogPath + "\\" + dPath + "\\" + dPath);
 
-                        string excludes = "";
-                        foreach (string sI in IgnoreExtensions)
+                        //string excludes = "";
+                        //foreach (string sI in IgnoreExtensions)
+                        //{
+                        //    excludes += " -x!*" + sI;
+                        //}
+
+                        //foreach (string sI in IgnoreFiles)
+                        //{
+                        //    excludes += " -x!" + sI;
+                        //}
+
+                        //string pClean = ogPath + "\\" + dPath2 + "\\*.* ";
+                        //Process p = new Process();
+                        //p.StartInfo.Verb = "runas";
+                        //p.StartInfo.CreateNoWindow = true;
+                        //p.StartInfo.UseShellExecute = false;
+                        //p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                        //p.StartInfo.FileName = "7za.exe";
+                        //p.StartInfo.Arguments = "a -tzip -r -mx" + cLevel + " " + ogPath + "\\" + dPath2 + ".pak " + pClean + excludes;
+                        //p.Start();
+                        //p.WaitForExit();
+                        bwpReport(dPath + " packing", false);
+                        if (CompressFolder(ogPath + "\\" + dPath2))
                         {
-                            excludes += " -x!*" + sI;
+                            bwpReport(dPath + " packed", true);
+                        }
+                        else
+                        {
+                            bwpReport(dPath + " error on packing", true);
                         }
 
-                        foreach (string sI in IgnoreFiles)
-                        {
-                            excludes += " -x!" + sI;
-                        }
-
-                        string pClean = ogPath + "\\" + dPath + "\\*.* ";
-                        Process p = new Process();
-                        p.StartInfo.Verb = "runas";
-                        p.StartInfo.CreateNoWindow = true;
-                        p.StartInfo.UseShellExecute = false;
-                        p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                        p.StartInfo.FileName = "7za.exe";
-                        p.StartInfo.Arguments = "a -tzip -r -mx" + cLevel + " " + ogPath + "\\" + dPath + ".pak " + pClean + excludes;
-                        p.Start();
-                        p.WaitForExit();
-                        bwpReport(dPath + " packed", true);
+                        
                     
                         try
                         {
-                            Directory.Delete(ogPath + "\\" + dPath, true);
+                            Directory.Delete(ogPath + "\\" + dPath2, true);
                         }
                         catch (Exception)
                         {
@@ -240,32 +257,59 @@ namespace Hearts_of_Oak_Packager
                     bwpReport(dPath + " copied", true);
                 }
                 
+
+
             }
 
-            //DirectoryCopy(txbGamePath.Text, txbOutput.Text + "\\Game", true);
-
-            //if (bwpMove.CancellationPending) { return; };
-
-            ////pack all of the folders in the game directory
-            //if (cbxCompressGame.Checked)
-            //{
-            //    // get the output game folder
-            //    foreach (string d in Directory.GetDirectories(txbOutput.Text + "\\Game"))
-            //    {
-            //        string zPath = new DirectoryInfo(@d).Name;
-            //        bwpReport("Compressing game pak " + zPath);
-            //        Zipper z = new Zipper();
-            //        z.ZipFile = @txbOutput.Text + "\\Game\\" + zPath + ".pak";
-            //        z.ItemList.Add(@"*.*");
-            //        z.ExcludeFollowing.Add(FileHelper.IgnoreExtensions);
-            //        z.PathInZip = enPathInZip.Relative;
-            //        z.Recurse = true;
-            //        z.Zip();
-            //    }
-            //}
+            //now got through and pack the special folders that didn't get packed the first time around
+            if (cbxCompressGame.Checked)
+            {
+                foreach (string d in Directory.GetDirectories(ogPath))
+                {
+                    if (!IgnoreCompress.Any(d.Contains) && Directory.Exists(d))
+                    {
+                        bwpReport(new DirectoryInfo(@d).Name + " packing", false);
+                        CompressFolder(d);
+                        Directory.Delete(d, true);
+                        bwpReport(new DirectoryInfo(@d).Name + " packed", true);
+                    }
+                }
+                
+            }
+                        
         }
 
+        private bool CompressFolder(string fPath) {
+            try
+            {
+                string excludes = "";
+                foreach (string sI in IgnoreExtensions)
+                {
+                    excludes += " -x!*" + sI;
+                }
 
+                foreach (string sI in IgnoreFiles)
+                {
+                    excludes += " -x!" + sI;
+                }
+
+                string pClean = fPath + "\\*.* ";
+                Process p = new Process();
+                p.StartInfo.Verb = "runas";
+                p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                p.StartInfo.FileName = "7za.exe";
+                p.StartInfo.Arguments = "a -tzip -r -mx" + cLevel + " " + fPath + ".pak " + pClean + excludes;
+                p.Start();
+                p.WaitForExit();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }             
+        }
 
         private void bwpReport(string msg)
         {

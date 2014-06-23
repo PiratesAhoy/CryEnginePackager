@@ -1,0 +1,5 @@
+﻿GameData=Difficulty
+GameData=Libs
+GameData=Materials
+GameData=Prefabs
+Scripts=Entities
