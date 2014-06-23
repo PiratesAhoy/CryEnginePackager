@@ -19,7 +19,11 @@ namespace Hearts_of_Oak_Packager
         public List<string> IgnoreFolders = new List<string>();
         public List<string> IgnoreFiles = new List<string>();
         public List<string> IgnoreCompress = new List<string>();
+        public List<_setting> extRedirectPath = new List<_setting>();
         
+        public static string _settingFile = "settings.txt";
+        public List<_setting> settings = new List<_setting>();
+
         public Form1()
         {
             InitializeComponent();
@@ -32,6 +36,8 @@ namespace Hearts_of_Oak_Packager
             FillListFromFile("IgnoreFiles.txt", IgnoreFiles);
             FillListFromFile("IgnoreCompress.txt", IgnoreCompress);
 
+            extRedirectPath.Add(new _setting() { _name = "Animation", _value = ".anm" });
+            extRedirectPath.Add(new _setting() { _name = "GeomCaches", _value = ".cax" });
         }
 
         void FillListFromFile(string txtFile, List<string> _list)
@@ -61,8 +67,42 @@ namespace Hearts_of_Oak_Packager
 
         private void SaveSettings()
         {
+            
+        }
 
+        public static void GetSettings(string _fileName, List<_setting> _settings)
+        {
+            if (File.Exists(_fileName)) {
+                string[] sAllLines = File.ReadAllLines(_fileName);
 
+                foreach (string sLine in sAllLines)
+                {
+                    //strip out comments from the lines
+                    string[] fSplit = sLine.Split(new string[]{"--"},System.StringSplitOptions.None);
+                    if (fSplit[0].Trim().Length > 0)
+                    {
+                        //get the settings
+                        string[] sSplit = sLine.Split(new Char[]{'='});
+                        if (sSplit.Length > 1)
+                        {
+                            _setting sInfo = new _setting();
+                            sInfo._name = sSplit[0];
+                            sInfo._value = sSplit[1];
+                            _settings.Add(sInfo);
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void GetSettings(string _fileName, BindingList<_setting> _settings)
+        {
+            List<_setting> _sSettings = new List<_setting>();
+            GetSettings(_fileName, _sSettings);
+            foreach (_setting s in _sSettings)
+            {
+                _settings.Add(s);
+            }
         }
 
         private void btnGamePath_Click(object sender, EventArgs e)
@@ -97,6 +137,14 @@ namespace Hearts_of_Oak_Packager
                 if (!IgnoreExtensions.Any(fName.Extension.Contains) && !IgnoreFiles.Any(fName.Name.Contains))
                 File.Copy(f, txbOutput.Text + "\\" + fName.Name, true);
             }
+
+            if (cbxCompressGame.Checked)
+            {
+                string gPath = new DirectoryInfo(txbGamePath.Text).Name;
+                FileSearchAndMove(txbGamePath.Text, Path.Combine(txbOutput.Text, gPath).ToString(), txbGamePath.Text);
+            }
+            
+
 
             //move all of the main paths except for the game folder
             foreach (String d in Directory.GetDirectories(txbCERoot.Text))
@@ -136,6 +184,8 @@ namespace Hearts_of_Oak_Packager
 
                     if (!IgnoreCompress.Any(dPath.Contains))
                     {
+                        // find what folder this path would normally end up in
+
                         if (!Directory.Exists(ogPath + "\\" + dPath)) { Directory.CreateDirectory(ogPath + "\\" + dPath); };
                         DirectoryCopy(d, ogPath + "\\" + dPath + "\\" + dPath, true);
 
@@ -228,6 +278,32 @@ namespace Hearts_of_Oak_Packager
             if (logme) { iP = 1; };
             bwpMove.ReportProgress(iP, msg);
         }
+
+        private void FileSearchAndMove(string sourceDirName, string destDirName, string BaseDir)
+        {
+            foreach (string d in Directory.GetDirectories(sourceDirName))
+            {
+                foreach (string f in Directory.GetFiles(d))
+                {
+                    //see if the extension matches a special extension
+                    FileInfo fi = new FileInfo(f);
+                    foreach (_setting s in extRedirectPath) {
+                        if (fi.Extension == s._value) {
+                            //correct it to be the folder it should be in, replace the base path subdir
+                            string destDir = d.Replace(BaseDir,"");
+                            destDir = destDirName + "\\" + s._name + destDir;
+                            if (!Directory.Exists(destDir)) { Directory.CreateDirectory(destDir); };
+                            destDir = destDir + "\\" + fi.Name;
+                            fi.CopyTo(destDir, true);
+                        }
+                    }    
+                }
+                
+                FileSearchAndMove(d, destDirName, BaseDir);
+            }
+        }
+
+        
 
         private void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
         {
@@ -364,5 +440,20 @@ namespace Hearts_of_Oak_Packager
             OpenSetting("IgnoreCompress");
         }
 
+        private void settingscfgToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditSettingFile f = new EditSettingFile();
+            f.strFileName = "System";
+            f._path = txbCERoot.Text;
+            f.ShowDialog();
+        }
+
+
+    }
+
+    public class _setting
+    {
+        public string _name;
+        public string _value;
     }
 }

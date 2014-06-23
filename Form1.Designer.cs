@@ -39,6 +39,14 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.includeFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ignoreExtensionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ignoreFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ignoreFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ignoreGameFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.gameFolderPackSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnGamePath = new System.Windows.Forms.Button();
             this.txbGamePath = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,12 +64,7 @@
             this.cbxCompressionLevel = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.includeFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ignoreExtensionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ignoreFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ignoreFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ignoreGameFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingscfgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -121,26 +124,87 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.includeFoldersToolStripMenuItem,
+            this.ignoreExtensionsToolStripMenuItem,
+            this.ignoreFoldersToolStripMenuItem,
+            this.ignoreFilesToolStripMenuItem,
+            this.ignoreGameFoldersToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.gameFolderPackSettingToolStripMenuItem,
+            this.settingscfgToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // includeFoldersToolStripMenuItem
+            // 
+            this.includeFoldersToolStripMenuItem.Name = "includeFoldersToolStripMenuItem";
+            this.includeFoldersToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.includeFoldersToolStripMenuItem.Text = "Include Folders";
+            this.includeFoldersToolStripMenuItem.Click += new System.EventHandler(this.includeFoldersToolStripMenuItem_Click);
+            // 
+            // ignoreExtensionsToolStripMenuItem
+            // 
+            this.ignoreExtensionsToolStripMenuItem.Name = "ignoreExtensionsToolStripMenuItem";
+            this.ignoreExtensionsToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.ignoreExtensionsToolStripMenuItem.Text = "Ignore Extensions";
+            this.ignoreExtensionsToolStripMenuItem.Click += new System.EventHandler(this.ignoreExtensionsToolStripMenuItem_Click);
+            // 
+            // ignoreFoldersToolStripMenuItem
+            // 
+            this.ignoreFoldersToolStripMenuItem.Name = "ignoreFoldersToolStripMenuItem";
+            this.ignoreFoldersToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.ignoreFoldersToolStripMenuItem.Text = "Ignore Folders";
+            this.ignoreFoldersToolStripMenuItem.Click += new System.EventHandler(this.ignoreFoldersToolStripMenuItem_Click);
+            // 
+            // ignoreFilesToolStripMenuItem
+            // 
+            this.ignoreFilesToolStripMenuItem.Name = "ignoreFilesToolStripMenuItem";
+            this.ignoreFilesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.ignoreFilesToolStripMenuItem.Text = "Ignore Files";
+            this.ignoreFilesToolStripMenuItem.Click += new System.EventHandler(this.ignoreFilesToolStripMenuItem_Click);
+            // 
+            // ignoreGameFoldersToolStripMenuItem
+            // 
+            this.ignoreGameFoldersToolStripMenuItem.Name = "ignoreGameFoldersToolStripMenuItem";
+            this.ignoreGameFoldersToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.ignoreGameFoldersToolStripMenuItem.Text = "Ignore Game Folders";
+            this.ignoreGameFoldersToolStripMenuItem.Click += new System.EventHandler(this.ignoreGameFoldersToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(209, 6);
+            // 
+            // gameFolderPackSettingToolStripMenuItem
+            // 
+            this.gameFolderPackSettingToolStripMenuItem.Name = "gameFolderPackSettingToolStripMenuItem";
+            this.gameFolderPackSettingToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.gameFolderPackSettingToolStripMenuItem.Text = "Game Folder Pack Setting ";
             // 
             // btnGamePath
             // 
@@ -303,52 +367,12 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Log";
             // 
-            // settingsToolStripMenuItem
+            // settingscfgToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.includeFoldersToolStripMenuItem,
-            this.ignoreExtensionsToolStripMenuItem,
-            this.ignoreFoldersToolStripMenuItem,
-            this.ignoreFilesToolStripMenuItem,
-            this.ignoreGameFoldersToolStripMenuItem});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // includeFoldersToolStripMenuItem
-            // 
-            this.includeFoldersToolStripMenuItem.Name = "includeFoldersToolStripMenuItem";
-            this.includeFoldersToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.includeFoldersToolStripMenuItem.Text = "Include Folders";
-            this.includeFoldersToolStripMenuItem.Click += new System.EventHandler(this.includeFoldersToolStripMenuItem_Click);
-            // 
-            // ignoreExtensionsToolStripMenuItem
-            // 
-            this.ignoreExtensionsToolStripMenuItem.Name = "ignoreExtensionsToolStripMenuItem";
-            this.ignoreExtensionsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.ignoreExtensionsToolStripMenuItem.Text = "Ignore Extensions";
-            this.ignoreExtensionsToolStripMenuItem.Click += new System.EventHandler(this.ignoreExtensionsToolStripMenuItem_Click);
-            // 
-            // ignoreFoldersToolStripMenuItem
-            // 
-            this.ignoreFoldersToolStripMenuItem.Name = "ignoreFoldersToolStripMenuItem";
-            this.ignoreFoldersToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.ignoreFoldersToolStripMenuItem.Text = "Ignore Folders";
-            this.ignoreFoldersToolStripMenuItem.Click += new System.EventHandler(this.ignoreFoldersToolStripMenuItem_Click);
-            // 
-            // ignoreFilesToolStripMenuItem
-            // 
-            this.ignoreFilesToolStripMenuItem.Name = "ignoreFilesToolStripMenuItem";
-            this.ignoreFilesToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.ignoreFilesToolStripMenuItem.Text = "Ignore Files";
-            this.ignoreFilesToolStripMenuItem.Click += new System.EventHandler(this.ignoreFilesToolStripMenuItem_Click);
-            // 
-            // ignoreGameFoldersToolStripMenuItem
-            // 
-            this.ignoreGameFoldersToolStripMenuItem.Name = "ignoreGameFoldersToolStripMenuItem";
-            this.ignoreGameFoldersToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.ignoreGameFoldersToolStripMenuItem.Text = "Ignore Game Folders";
-            this.ignoreGameFoldersToolStripMenuItem.Click += new System.EventHandler(this.ignoreGameFoldersToolStripMenuItem_Click);
+            this.settingscfgToolStripMenuItem.Name = "settingscfgToolStripMenuItem";
+            this.settingscfgToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.settingscfgToolStripMenuItem.Text = "Settings.cfg";
+            this.settingscfgToolStripMenuItem.Click += new System.EventHandler(this.settingscfgToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -420,6 +444,9 @@
         private System.Windows.Forms.ToolStripMenuItem ignoreFoldersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ignoreFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ignoreGameFoldersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem gameFolderPackSettingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingscfgToolStripMenuItem;
     }
 }
 
