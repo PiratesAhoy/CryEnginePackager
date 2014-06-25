@@ -7,8 +7,8 @@
     <ProjectGuid>{E9DDD713-7CF8-45A8-9C67-43F94E2789DA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hearts_of_Oak_Packager</RootNamespace>
-    <AssemblyName>Hearts of Oak Packager</AssemblyName>
+    <RootNamespace>CryEngine_Packager</RootNamespace>
+    <AssemblyName>CryEngine Packager</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -96,6 +96,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

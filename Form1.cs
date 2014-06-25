@@ -449,7 +449,10 @@ namespace Hearts_of_Oak_Packager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            foreach (_setting s in extRedirectPath)
+            {
+                IgnoreExtensions.Add(s._value);
+            }
         }
 
         private void includeFoldersToolStripMenuItem_Click(object sender, EventArgs e)

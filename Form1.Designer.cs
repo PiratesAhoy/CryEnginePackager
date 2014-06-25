@@ -47,6 +47,7 @@
             this.ignoreGameFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.gameFolderPackSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingscfgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnGamePath = new System.Windows.Forms.Button();
             this.txbGamePath = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -64,7 +65,6 @@
             this.cbxCompressionLevel = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.settingscfgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -205,6 +205,13 @@
             this.gameFolderPackSettingToolStripMenuItem.Name = "gameFolderPackSettingToolStripMenuItem";
             this.gameFolderPackSettingToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.gameFolderPackSettingToolStripMenuItem.Text = "Game Folder Pack Setting ";
+            // 
+            // settingscfgToolStripMenuItem
+            // 
+            this.settingscfgToolStripMenuItem.Name = "settingscfgToolStripMenuItem";
+            this.settingscfgToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.settingscfgToolStripMenuItem.Text = "Settings.cfg";
+            this.settingscfgToolStripMenuItem.Click += new System.EventHandler(this.settingscfgToolStripMenuItem_Click);
             // 
             // btnGamePath
             // 
@@ -367,13 +374,6 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Log";
             // 
-            // settingscfgToolStripMenuItem
-            // 
-            this.settingscfgToolStripMenuItem.Name = "settingscfgToolStripMenuItem";
-            this.settingscfgToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.settingscfgToolStripMenuItem.Text = "Settings.cfg";
-            this.settingscfgToolStripMenuItem.Click += new System.EventHandler(this.settingscfgToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,7 +400,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Hearts Of Oak Packager";
+            this.Text = "CryEngine Packager";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

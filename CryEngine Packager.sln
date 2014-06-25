@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hearts of Oak Packager", "Hearts of Oak Packager.csproj", "{E9DDD713-7CF8-45A8-9C67-43F94E2789DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryEngine Packager", "CryEngine Packager.csproj", "{E9DDD713-7CF8-45A8-9C67-43F94E2789DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
