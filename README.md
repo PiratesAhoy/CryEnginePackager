@@ -1,4 +1,4 @@
-##Hearts Of Oak Packager
+##CryEngine Packager
 ===================
 
 **CryEngine Packager** - Designed to simplify the release process of a CryEngine project.
