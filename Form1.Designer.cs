@@ -65,6 +65,8 @@
             this.cbxCompressionLevel = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.ofdSaveFile = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,12 +128,14 @@
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -374,6 +378,20 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Log";
             // 
+            // ofdSaveFile
+            // 
+            this.ofdSaveFile.DefaultExt = "txt";
+            this.ofdSaveFile.FileName = "settings.txt";
+            this.ofdSaveFile.Filter = "Text Files|*.txt|All Files|*.*";
+            this.ofdSaveFile.Title = "Open Settings File";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.CreatePrompt = true;
+            this.saveFileDialog1.FileName = "settings.txt";
+            this.saveFileDialog1.Filter = "Text Files|*.txt|All Files|*.*";
+            this.saveFileDialog1.Title = "Save Settings";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -447,6 +465,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem gameFolderPackSettingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingscfgToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog ofdSaveFile;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 
