@@ -7,3 +7,4 @@ bintemp
 user
 rc
 flashassets
+editorplugins

@@ -67,10 +67,6 @@ namespace Hearts_of_Oak_Packager
             this.Close();
         }
 
-
-
-        
-
         private void btnGamePath_Click(object sender, EventArgs e)
         {
             fbdCERoot.ShowNewFolderButton = false;
@@ -92,11 +88,6 @@ namespace Hearts_of_Oak_Packager
                 bwpMove.RunWorkerAsync();
             }
         }
-
-        
-
-
-
 
         #region "Functions"
 
@@ -197,7 +188,7 @@ namespace Hearts_of_Oak_Packager
                 p.StartInfo.UseShellExecute = false;
                 p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 p.StartInfo.FileName = "7za.exe";
-                p.StartInfo.Arguments = "a -tzip -r -mx" + cLevel + " " + fPath + ".pak " + pClean + excludes;
+                p.StartInfo.Arguments = "a -tzip -r -v2g -mx" + cLevel + " " + fPath + ".pak " + pClean + excludes;
                 p.Start();
                 p.WaitForExit();
                 return true;
@@ -401,6 +392,27 @@ namespace Hearts_of_Oak_Packager
                     }
                 }
 
+                //cleanup the names
+                foreach (string s in Directory.GetFiles(ogPath))
+                {
+                    string[] fName = s.Split(new Char[] { '.' });
+                    if (fName[fName.Length - 2].ToLower() == "pak")
+                    {
+                        int iValue = 0;
+                        if (int.TryParse(fName[fName.Length - 1], out iValue)) {
+                            fName[fName.Length - 1] = "";
+                            if (iValue > 1) { fName[fName.Length - 1] = iValue.ToString(); }
+                        }
+                        string newName = "";
+                        for (int i = 0; i < fName.Length - 2; i++)
+                        {
+                            newName += fName[i];
+                        }
+                        newName += fName[fName.Length - 1] + ".pak";
+                        if (File.Exists(newName)) { File.Delete(newName); };
+                        File.Move(s,newName);
+                    }
+                }
             }
 
         }
